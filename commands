@@ -1,11 +1,63 @@
-frames 50
-basename simple
-push
-move 450 250 0
-scale 2 2 2 bigenator
-rotate y 360 spinny
-sphere 0 0 0 100 
-vary spinny 0 99 0 1
-vary bigenator 0 49 0 1
-vary bigenator 50 99 1 0
+ambient 255 255 255
+light l1 0 1 1 255 0 255
+constants white 0.25 0.5 0.25 0.5 0.5 0.25 0.9 0.5 0.25
+front
+box 0 400 0 25 250 0 
+box 25 150 0 25 100 0
+
+leg1
+box 50 50 0 25 25 0 
+box 75 75 0 25 25 0
+box 100 125 0 50 50 0
+box 125 75 0 25 25 0
+
+leg2
+box 150 50 0 25 25 0
+box 175 75 0 25 25 0
+box 200 100 0 25 25 0
+box 200 125 0 100 25 0
+box 275 100 0 25 50 0
+
+leg3
+box 300 50 0 25 25 0
+box 325 75 0 25 25 0
+box 375 75 0 25 25 0
+box 350 125 0 50 50 0
+
+leg4
+box 400 50 0 25 25 0 
+box 425 75 0 25 25 0
+box 450 150 0 25 75 0
+
+tail
+box 475 400 0 25 250 0
+box 450 425 0 25 25 0
+box 425 400 0 25 50 0
+box 375 350 0 50 25 0
+box 325 375 0 50 25 0
+
+
+mouth
+box 100 300 0 100 25 0 
+box 75 325 0 25 25 0
+box 200 325 0 25 25 0
+
+nose
+box 125 350 0 50 25 0
+box 125 325 0 25 25 0
+
+eye
+box 100 400 0 25 25 0
+box 175 400 0 25 25 0
+
+top
+box 25 475 0 25 75 0 
+box 50 500 0 25 25 0
+box 75 475 0 25 25 0
+box 100 500 0 100 25 0
+box 200 475 0 25 25 0
+box 225 500 0 25 25 0
+box 250 475 0 25 50 0
+box 275 425 0 25 25 0
+box 300 400 0 25 25 0
 save pic.png

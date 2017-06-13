@@ -20,6 +20,10 @@ function make_int(matrix)
 	 return matrix
 end
 
+lightMatrix = {}
+ambientMatrix = {}
+constantsMatrix = {}
+
 function parseFile(f)
 	 local lines,s,n,lstack,sizeL,top,temp = {},0,"pic.png"
 	 local basename, frames = 0,1
@@ -29,59 +33,6 @@ function parseFile(f)
 	     table.insert(lines, line)
 	     s = s + 1
 	 end
-
-	 --first pass
-	 for i = 1, s do
-	     ln = lines[i]:split(" ")
-	     if (ln[1] == "basename") then basename = ln[2]
-	     elseif (ln[1] == "frames") then frames = tonumber(ln[2])
-	     elseif (ln[1] == "move") then
-	     	    if (ln[5]) then print(ln[5]) end
-	     
-	     elseif (ln[1] == "scale") then
-	     	    if (ln[5]) then print(ln[5]) end
-	     
-	     elseif (ln[1] == "rotate") then
-	     	    if (ln[4]) then print(ln[4]) end
-	     end
-	 end
-
-	 local framesMatrix = {}
-	 for i = 1 , frames do
-	     framesMatrix[i] = {}
-	     --print(i)
-	 end
-
-	 local knobs = {}
-	 
-
-	 --second pass
-	 local start_frame, end_frame
-	 local start_value, end_value, delta
-	 local curr
-	 for i = 1 , s do
-	     ln = lines[i]:split(" ")
-	     if (ln[1] == "vary") then
-	     	start_frame = ln[3]
-		end_frame = ln[4]
-		start_value = ln[5]
-		end_value = ln[6]
-		delta = (end_value - start_value) / (end_frame - start_frame)
-		
-		for k = 1, frames do
-		    if k == start_frame then framesMatrix[k][ln[2]] = start_value
-		    else framesMatrix[k][ln[2]] = start_value + (k - start_frame) * delta
-		    end  
-		     
-		end    	
-		
-		
-             end
-	 end
-	 
-	 local xval, yval, zval, theta
-	 for k = 1 , frames  do 
-	 --print(k)	 
 	 for i = 1, s do 
 	     top = lstack[sizeOf(lstack)]
 	     ln = lines[i]:split(" ")
@@ -187,19 +138,33 @@ function parseFile(f)
 	     elseif (ln[1] == "pop") then
 	     	    pop(lstack)
 	     
-	     elseif (ln[1] == "clearanim") then 
-	     	    os.execute("rm -rf anim")
-		    os.execute("mkdir anim")	     
+	     elseif (ln[1] == "light") then
+	     	    local r,g,b = ln[2], ln[3] , ln[4]
+		    local x ,y ,z = ln[5] , ln[6], ln[6]
+		    lightMatrix = {r,g,b,x,y,z}
+
+	     elseif (ln[1] == "ambient") then
+	     	    local r, g, b = ln[2],ln[3],ln[4]
+		    ambientMatrix = {r,g,b}
+
+	     elseif (ln[1] == "constants") then
+	     	    local kar,kdr,ksr, kag, kdg, ksg, kab,kdb, ksb
+		    kar = ln[3]
+		    kdr = ln[4]
+		    ksr = ln[5]
+		    kag = ln[6]
+		    kdg = ln[7]
+		    ksg = ln[8]
+		    kab = ln[9]
+		    kdb = ln[10]
+		    ksb = ln[11]
+		    constantsMatrix = {kar,kdr,ksr,kag,kdg,ksg,kab,kdb,ksb}
+
+	     elseif (ln[1] == "shading") then
+
 	     end
+	     --print(constantsMatrix[1])	     
 	     end
-	     
-	     --[[
-	     os.execute("convert line.ppm " .. name)
-	     os.execute("mv " .. name .. " anim")
-	     os.execute("rm line.ppm")
-	     ]]--
-	     --print("saving " .. name)
- 	 end
 end
 
 --parseFile("commands")

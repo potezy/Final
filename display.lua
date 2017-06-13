@@ -2,9 +2,9 @@
 function clear_screen(s)
 	 for i = 0 , XRES-1 do
 	     for k = 0 , YRES -1 do
-	     	 s[i][k].red = 0
-		 s[i][k].green = 0
-		 s[i][k].blue = 0
+	     	 s[i][k].red = 200
+		 s[i][k].green = 200
+		 s[i][k].blue = 200
 	     end
 	 end
 end
